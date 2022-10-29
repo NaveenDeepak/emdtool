@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "emdtool"
+  site-url: "https://NaveenDeepak.github.io/emdtool"
+  description: "tool to assist electric machine design and analysis"
+  repo-branch: main
+  repo-url: "https://github.com/NaveenDeepak/emdtool"
