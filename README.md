@@ -17,23 +17,28 @@ pip install emdtool
 Fill me in please! Don’t forget code examples:
 
 ``` python
-#
-#import sys
-#import numpy as np
-# adding additional path to system for searching libraries
-#sys.path.insert(0,'/home/vnd/MotorDesigner/emdtool')
-```
-
-``` python
 # import the tool
-import emdtool
+from emdtool import dq
 ```
 
 ``` python
-#abc = [1,-0.5,-0.5]
-
-#angle = 0
-#abc = [[np.cos(angle)], [np.cos(angle-2*np.pi/3)], [np.cos(angle+2*np.pi/3)]]
-#dq0 = emdtool.dq.transform(angle, abc)
-print('To be included')
+# multiply a column vector of abc values to get corresponding dq0 values
+angle = 0
+abc = [[1], [-0.5], [-0.5]]
+dq0 = dq.transform(angle, abc)
 ```
+
+    tranformation matrix (shape:(3, 3)): 
+    [[ 0.66666667 -0.33333333 -0.33333333]
+     [ 0.         -0.57735027  0.57735027]
+     [ 0.33333333  0.33333333  0.33333333]]
+
+    abc matrix (shape:(3, 1)): 
+    [[ 1. ]
+     [-0.5]
+     [-0.5]]
+
+    tranformed matrix: 
+     [[1.]
+     [0.]
+     [0.]]
