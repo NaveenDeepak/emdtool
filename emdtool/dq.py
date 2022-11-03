@@ -3,7 +3,12 @@
 # %% auto 0
 __all__ = ['transform', 'inv_transform']
 
-# %% ../nbs/02_dq.ipynb 7
+# %% ../nbs/02_dq.ipynb 3
+import numpy as np
+import matplotlib.pyplot as plt
+import sympy
+
+# %% ../nbs/02_dq.ipynb 8
 def transform(theta, x):
     k = (2/3)*np.matrix([[np.cos(theta), np.cos(theta - 2*np.pi/3), np.cos(theta + 2*np.pi/3)],
     [np.sin(theta), np.sin(theta - 2*np.pi/3), np.sin(theta + 2*np.pi/3)],
@@ -22,7 +27,7 @@ def transform(theta, x):
     except:
         print('incompatible input shapes')
 
-# %% ../nbs/02_dq.ipynb 11
+# %% ../nbs/02_dq.ipynb 12
 def inv_transform(theta, x):
     k1 = np.matrix(((np.cos(theta), np.sin(theta), 1),
         (np.cos(theta - 2*np.pi/3), np.sin(theta - 2*np.pi/3), 1),

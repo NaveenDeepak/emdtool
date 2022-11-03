@@ -17,7 +17,23 @@ pip install emdtool
 Fill me in please! Don’t forget code examples:
 
 ``` python
-1+1
+#
+#import sys
+#import numpy as np
+# adding additional path to system for searching libraries
+#sys.path.insert(0,'/home/vnd/MotorDesigner/emdtool')
 ```
 
-    2
+``` python
+# import the tool
+import emdtool
+```
+
+``` python
+#abc = [1,-0.5,-0.5]
+
+#angle = 0
+#abc = [[np.cos(angle)], [np.cos(angle-2*np.pi/3)], [np.cos(angle+2*np.pi/3)]]
+#dq0 = emdtool.dq.transform(angle, abc)
+print('To be included')
+```

@@ -3,7 +3,11 @@
 # %% auto 0
 __all__ = ['spm', 'ipm']
 
-# %% ../nbs/01_pu_pmsm.ipynb 6
+# %% ../nbs/01_pu_pmsm.ipynb 3
+import numpy as np
+import matplotlib.pyplot as plt
+
+# %% ../nbs/01_pu_pmsm.ipynb 7
 class spm():
     def __init__(self, phi_m):
         self.lpu = np.sqrt(1-phi_m**2)
@@ -96,7 +100,7 @@ class spm():
         plt.tight_layout()
         plt.show()
 
-# %% ../nbs/01_pu_pmsm.ipynb 18
+# %% ../nbs/01_pu_pmsm.ipynb 19
 #export
 class ipm():
     def __init__(self, phi_m, ld):
