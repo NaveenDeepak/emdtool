@@ -6,6 +6,7 @@ __all__ = ['spm', 'ipm']
 # %% ../nbs/01_pu_pmsm.ipynb 3
 import numpy as np
 import matplotlib.pyplot as plt
+from IPython import display
 
 # %% ../nbs/01_pu_pmsm.ipynb 8
 class spm():
