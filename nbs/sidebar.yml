@@ -4,3 +4,6 @@ website:
       - index.ipynb
       - 00_core.ipynb
       - 01_pu_pmsm.ipynb
+      - 02_dq.ipynb
+      - 03_cogging.ipynb
+      - 04_winding_distribution.ipynb

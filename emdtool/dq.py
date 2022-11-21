@@ -7,6 +7,7 @@ __all__ = ['transform', 'inv_transform']
 import numpy as np
 import matplotlib.pyplot as plt
 import sympy
+from IPython import display
 
 # %% ../nbs/02_dq.ipynb 8
 def transform(theta, x):
