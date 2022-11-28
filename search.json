@@ -1,0 +1,65 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "emdtool",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "emdtool",
+    "section": "Install",
+    "text": "Install\npip install emdtool"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "emdtool",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n# import the tool\nfrom emdtool import dq\n\n\n# multiply a column vector of abc values to get corresponding dq0 values\nangle = 0\nabc = [[1], [-0.5], [-0.5]]\ndq0 = dq.transform(angle, abc)\n\ntranformation matrix (shape:(3, 3)): \n[[ 0.66666667 -0.33333333 -0.33333333]\n [ 0.         -0.57735027  0.57735027]\n [ 0.33333333  0.33333333  0.33333333]]\n\nabc matrix (shape:(3, 1)): \n[[ 1. ]\n [-0.5]\n [-0.5]]\n\ntranformed matrix: \n [[1.]\n [0.]\n [0.]]"
+  },
+  {
+    "objectID": "pu_pmsm.html",
+    "href": "pu_pmsm.html",
+    "title": "pu_pmsm",
+    "section": "",
+    "text": "Ideal PMSM model in p.u ignoring resistance\n\\(V = \\omega \\sqrt{ (\\lambda_m - L_d i_d )^2 + (L_q i_q )^2 }\\)\n\\(T = \\dfrac{3 p}{2} [\\lambda_m i_q + (L_q - L_d)i_q i_d]\\)\n\\(i_d = I \\sin(\\gamma)\\)\n\\(i_q = I \\cos(\\gamma)\\)\n\n\n\n\n\n\n\nspm class provides the ideal per unit capability of the machine defined by two parameters\n1. flux linkage (\\(\\lambda_m\\)) = phi_m\n2. inductance (\\(L_d = L_q = L\\)) = lpu\nSPM achieves maximum torque per ampere with \\(\\gamma = 0\\).\nAt base speed, \\(V\\), \\(\\omega\\) have 1 p.u value.\nConsidering these SPM specific constraints at base speed, \\(\\lambda_m\\) and \\(L\\) are bound by\n\\(1 = \\sqrt{\\lambda_m^2 + L^2 }\\)\nIn this implementation, SPM machine is characterized by just \\(L\\) i.e \\(lpu\\) as input. \\(\\lambda_m\\) is calculated using the above constraint.\n\nsource\n\n\n\n\n spm (phi_m)\n\nInitialize self. See help(type(self)) for accurate signature.\n\nsource\n\n\n\n\n spm.motor_puprofile (gamma_limit=85)\n\nthis method calculates the per unit profile of the machine with current angle limit of 85 degrees\n\nsource\n\n\n\n\n spm.motor_profile (Vb, Pb, wb)\n\nThis method takes Vb, Pb, wb as the base values for line voltage, KVA rating of the machine, base speed respectively\n\nsource\n\n\n\n\n spm.plot_puprofile ()\n\nplots the motor performance profile in p.u\n\nsource\n\n\n\n\n spm.plot_profile ()\n\nplots the motor performance profile in actual values\n\n\n\nMachine profile with:\nmagnet flux linkage = 0.8 p.u\nline-line base voltage = 42 V\nbase power value (available KVA) = 7000 W\nbase speed = 2500 rpm\n\nM1 = spm(0.8)\nM1.motor_puprofile()\nM1.motor_profile(42, 7000, 2500)\nM1.plot_profile()"
+  },
+  {
+    "objectID": "pu_pmsm.html#theory-ipm-pu-analysis-and-impelmentation",
+    "href": "pu_pmsm.html#theory-ipm-pu-analysis-and-impelmentation",
+    "title": "pu_pmsm",
+    "section": "Theory: IPM pu analysis and impelmentation",
+    "text": "Theory: IPM pu analysis and impelmentation\n\\(\\eta = \\dfrac{L_q}{L_d}\\)\n\\(V = \\omega \\sqrt{ (\\lambda_m - L_d \\cos(\\gamma) )^2 + (\\eta L_d \\sin(\\gamma) )^2 }\\)\n\\(T = \\dfrac{3 p}{2} [\\lambda_m \\cos(\\gamma) + (\\eta - 1) L_d \\dfrac{sin(2\\gamma)}{2}]\\)\n\nThe machine should operate with maximum torque per ampere decided by the current angle \\(\\gamma\\)\n\\(\\gamma\\) is dependent on the values of \\(\\lambda_m, L_d, \\eta\\)\nThe machine MTPA operation at base speed should achieve 1 p.u. voltage value\n\n\\(\\gamma_{mtpa} = \\sin^{-1} \\Big[ \\dfrac{ -\\lambda_m + \\sqrt{ \\lambda_m^2 + 8xx^2} }{4xx} \\Big]\\) where, \\(xx = L_d(\\eta - 1)\\).\nHowever the above expression is only valid if \\(\\eta > 1\\)\nSeveral possible combinations of \\(\\lambda_m, L_d, \\eta\\) can achieve given torque-speed characterisitic. To achieve ideal field weakening however, there exists a unique combination of \\(\\lambda_m = L_d\\) and \\(\\eta\\).\n\nsource\n\nipm\n\n ipm (phi_m, ld)\n\nInitialize self. See help(type(self)) for accurate signature.\n\nsource\n\n\nspm.motor_puprofile\n\n spm.motor_puprofile (gamma_limit=85)\n\nthis method calculates the per unit profile of the machine with current angle limit of 85 degrees\n\nsource\n\n\nipm.motor_profile\n\n ipm.motor_profile (Vb, Pb, wb)\n\nThis method takes Vb, Pb, wb as the base values for line voltage, KVA rating of the machine, base speed respectively\n\nsource\n\n\nipm.plot_puprofile\n\n ipm.plot_puprofile ()\n\nplots the motor performance profile in p.u\n\nsource\n\n\nipm.plot_profile\n\n ipm.plot_profile ()\n\nplots the motor performance profile in actual values"
+  },
+  {
+    "objectID": "pu_pmsm.html#ipm-class-use-example",
+    "href": "pu_pmsm.html#ipm-class-use-example",
+    "title": "pu_pmsm",
+    "section": "ipm class use: example",
+    "text": "ipm class use: example\nMachine profile with:\nmagnet flux linkage = 0.8 p.u\nsaliency = 2\nLd = 0.3 p.u\nline-line base voltage = 42 V\nbase power value (available KVA) = 7000 W\nbase speed = 2500 rpm\n\nM2 = ipm(0.2, 0.35)\nM2.calc_sal()\nprint(\"machine parameters validity: {}\".format(M2.valid))\nprint(\"suggested machine saliency: {}\".format(M2.sal))\n\nmachine parameters validity: 0\nsuggested machine saliency: 3.6\n\n\n\nM2.motor_puprofile()\nM2.plot_puprofile()\n\n\n\n\n\nM2.motor_profile(42, 10000, 2500)\nprint('base current: {} A rms'.format(M2.Ib))\nprint('max torque: {} N.m'.format(round(max(M2.values['torque']),2)))\nM2.plot_profile()\n\nbase current: 194.4 A rms\nmax torque: 22.98 N.m"
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()"
+  },
+  {
+    "objectID": "cogging.html",
+    "href": "cogging.html",
+    "title": "cogging",
+    "section": "",
+    "text": "Ns: number of stator slots\nNp: number of rotor poles\nNc: LCM(Ns, Np)\n\noptimum pole embrace: \\(j\\dfrac{N_p}{N_c} ; j \\in Z\\)\n\ndef spm_embrace(s, r):\n    Nc = np.lcm(s, r)\n    embrace_list = []\n    embrace = 0\n    j = 1\n    while(embrace<1):\n        embrace = round(j*r/Nc,3)\n        embrace_list.append(embrace)\n        j += 1\n    \n    return embrace_list\n\n\n\n\nspm_embrace(12,10)\n\n[0.167, 0.333, 0.5, 0.667, 0.833, 1.0]"
+  },
+  {
+    "objectID": "dq.html",
+    "href": "dq.html",
+    "title": "dq",
+    "section": "",
+    "text": "Convention, equations for PMSM\n\nemf\n\\(e_a = E \\sin(\\theta)\\)\n\\(e_b = E \\sin(\\theta - 2 \\pi/3)\\)\n\\(e_c = E \\sin(\\theta + 2 \\pi/3)\\)\n\n\nself-inductance\n\\(Laa = L_0 + L_2 \\cos(2 \\theta)\\)\n\\(Lbb = L_0 + L_2 \\cos(2 \\theta + 2 \\pi/3)\\)\n\\(Laa = L_0 + L_2 \\cos(2 \\theta - 2 \\pi/3)\\)\n\n\nmutual-inductance\n\\(Lab = M_0 + M_2 \\cos(2\\theta - 2\\pi/3)\\)\n\\(Lbc = M_0 + M_2 \\cos(2\\theta)\\)\n\\(Lca = M_0 + M_2 \\cos(2\\theta + 2\\pi/3)\\)\n\\(L_{abc} = \\begin{bmatrix} Laa & Lab & Lca \\\\ Lab & Lbb & Lbc \\\\ Lca & Lbc & Lca \\end{bmatrix}\\)\n\n\ntransformation matrix\n\\(K = \\dfrac{2}{3}\\begin{bmatrix} \\cos(\\theta) & \\cos(\\theta-2\\pi/3) & \\cos(\\theta+2\\pi/3)\\\\ \\sin(\\theta) & \\sin(\\theta-2\\pi/3) & \\sin(\\theta+2\\pi/3)\\\\ 0.5 & 0.5 & 0.5 \\end{bmatrix}\\)\n\n\ninverse transformation matrix\n\\(K^{-1} = \\begin{bmatrix} \\cos(\\theta) & \\sin(\\theta) & 1 \\\\ \\cos(\\theta-2\\pi/3) & \\sin(\\theta-2\\pi/3) & 1 \\\\ \\cos(\\theta+2\\pi/3) & \\sin(\\theta+2\\pi/3) & 1 \\end{bmatrix}\\)\n\n\nLdq0 axis inductance\n\\(L_d = (L_0 - M_0) - (\\dfrac{L_2}{2} + M_2)\\)\n\\(L_q = (L_0 - M_0) + (\\dfrac{L_2}{2} + M_2)\\)\n\nsource\n\n\n\ntransform\n\n transform (theta, x)\n\n\nforward transform example\n\nangle = 0\nx = [[np.cos(angle)], [np.cos(angle-2*np.pi/3)], [np.cos(angle+2*np.pi/3)]]\nx_dq = transform(angle, x)\n\ntranformation matrix (shape:(3, 3)): \n[[ 0.66666667 -0.33333333 -0.33333333]\n [ 0.         -0.57735027  0.57735027]\n [ 0.33333333  0.33333333  0.33333333]]\n\nabc matrix (shape:(3, 1)): \n[[ 1. ]\n [-0.5]\n [-0.5]]\n\ntranformed matrix: \n [[1.00000000e+00]\n [1.71752100e-17]\n [1.57281595e-16]]\n\n\n\nsource\n\n\n\ninv_transform\n\n inv_transform (theta, x)\n\n\ninverse tranform example\n\nangle = 0\nx = [1, 0, 0]\ninv_transform(angle, x)\n\ntranformation matrix (shape:(3, 3)): \n[[ 1.         0.         1.       ]\n [-0.5       -0.8660254  1.       ]\n [-0.5        0.8660254  1.       ]]\n\ndq matrix (shape:(1, 3)): \n[[1 0 0]]\n\ntranformed matrix: \n [[1. 0. 1.]]\n\n\nmatrix([[1., 0., 1.]])\n\n\n\n\n\\(L_{dq0}\\) measurements\n\nL0, L2, M0, M2, ta = sympy.symbols('L0, L2, M0, M2, ta')\nlaa = L0 + L2*sympy.cos(2*ta)\nlbb = L0 + L2*sympy.cos(2*ta + 2*sympy.pi/3)\nlcc = L0 + L2*sympy.cos(2*ta - 2*sympy.pi/3)\nlab = M0 + M2*sympy.cos(2*ta -2*sympy.pi/3)\nlbc = M0 + M2*sympy.cos(2*ta)\nlca = M0 + M2*sympy.cos(2*ta +2*sympy.pi/3)\n\n\\(L_d, L_q\\) can be measured in practice by locking the direct axis of rotor to one of the phases. Example:\n\nshort the terminals B-C\npass dc current through phase-A and shorted terminals of phase-B/C\npass sufficient current to ensure that rotor moves and locks to phase A\nAfter the rotor locks itself to phase-A. Remove DC current and measure inductance \\(L_m\\) across phase-A and phase-B\n\nThe measured inductance is given as\n\nLm = laa + lbb/2 -lab*3/2 - lca/2 + lbc/2\nLm\n\n\\(\\displaystyle \\frac{3 L_{0}}{2} - \\frac{L_{2} \\sin{\\left(2 ta + \\frac{\\pi}{6} \\right)}}{2} + L_{2} \\cos{\\left(2 ta \\right)} - \\frac{3 M_{0}}{2} + \\frac{M_{2} \\sin{\\left(2 ta + \\frac{\\pi}{6} \\right)}}{2} + \\frac{M_{2} \\cos{\\left(2 ta \\right)}}{2} + \\frac{3 M_{2} \\cos{\\left(2 ta + \\frac{\\pi}{3} \\right)}}{2}\\)\n\n\nAccording the expressions for inductance. rotor position \\(ta\\) is 90 degrees when the direct axis is aligned to Phase A. Substituting the same, expression of measured inductance is calculated as 3/2 times the Ld value.\n\nLm.evalf(subs={ta: np.pi/2})\n\n\\(\\displaystyle 1.5 L_{0} - 0.75 L_{2} - 1.5 M_{0} - 1.5 M_{2}\\)\n\n\nAbove expression is \\(\\dfrac{3}{2}L_d\\), providing experimental values for \\(L_d\\). In this rotor position, inductance (\\(L_m\\)) measured between phase B and phase C is\n\nlm = lbb + lcc - 2*lbc\nlm\n\n\\(\\displaystyle 2 L_{0} - L_{2} \\sin{\\left(2 ta + \\frac{\\pi}{6} \\right)} - L_{2} \\cos{\\left(2 ta + \\frac{\\pi}{3} \\right)} - 2 M_{0} - 2 M_{2} \\cos{\\left(2 ta \\right)}\\)\n\n\nSubstituting the same rotor position angle for \\(ta\\) shows that the measured values is twice the Lq inductance\n\nlm.evalf(subs={ta: np.pi/2})\n\n\\(\\displaystyle 2.0 L_{0} + 1.0 L_{2} - 2.0 M_{0} + 2.0 M_{2}\\)\n\n\nAbove expression is \\(2L_q\\), providing experimental value for \\(L_q\\)"
+  }
+]
