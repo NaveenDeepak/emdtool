@@ -22,5 +22,4 @@ d = { 'settings': { 'branch': 'main',
                                  'emdtool.pu_pmsm.spm.motor_profile': ('pu_pmsm.html#spm.motor_profile', 'emdtool/pu_pmsm.py'),
                                  'emdtool.pu_pmsm.spm.motor_puprofile': ('pu_pmsm.html#spm.motor_puprofile', 'emdtool/pu_pmsm.py'),
                                  'emdtool.pu_pmsm.spm.plot_profile': ('pu_pmsm.html#spm.plot_profile', 'emdtool/pu_pmsm.py'),
-                                 'emdtool.pu_pmsm.spm.plot_puprofile': ('pu_pmsm.html#spm.plot_puprofile', 'emdtool/pu_pmsm.py')},
-            'emdtool.winding': {}}}
+                                 'emdtool.pu_pmsm.spm.plot_puprofile': ('pu_pmsm.html#spm.plot_puprofile', 'emdtool/pu_pmsm.py')}}}
